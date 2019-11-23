@@ -1,0 +1,1 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=top.kpromise.dynamicdatasource.dynamicdatasource.DynamicDataSourceAutoConfiguration
