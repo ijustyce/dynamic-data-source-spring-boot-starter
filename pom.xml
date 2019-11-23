@@ -64,11 +64,6 @@
         <connection>scm:git:https://github.com/ijustyce/dynamic-data-source-spring-boot-starter.git</connection>
     </scm>
 
-    <organization>
-        <name>Alibaba Group</name>
-        <url>http://code.alibabatech.com/</url>
-    </organization>
-
     <licenses>
         <license>
             <name>MIT License</name>
@@ -119,6 +114,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>
@@ -132,15 +128,14 @@
         </plugins>
     </build>
     <distributionManagement>
-        <repository>
-            <id>releases</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
-        </repository>
         <snapshotRepository>
-            <id>snapshots</id>
+            <id>ossrh</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
         </snapshotRepository>
-        <downloadUrl>https://oss.sonatype.org/content/groups/public</downloadUrl>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
     </distributionManagement>
 
 </project>
