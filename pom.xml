@@ -6,8 +6,9 @@
 
     <groupId>top.kpromise</groupId>
     <artifactId>dynamic-data-source-spring-boot-starter</artifactId>
-    <version>1.0-SNAPSHOT</version>
-
+    <version>0.0.1</version>
+    <packaging>jar</packaging>
+    <description>Spring Boot with dynamic data source support.</description>
     <name>dynamic-data-source</name>
     <url>https://www.kpromise.top</url>
 
@@ -49,5 +50,97 @@
         </dependency>
 
     </dependencies>
+
+    <developers>
+        <developer>
+            <name>杨春</name>
+            <url>https://www.kpromise.top</url>
+            <email>ijustyce@163.com</email>
+        </developer>
+    </developers>
+
+    <scm>
+        <url>https://github.com/ijustyce/dynamic-data-source-spring-boot-starter.git</url>
+        <connection>scm:git:https://github.com/ijustyce/dynamic-data-source-spring-boot-starter.git</connection>
+    </scm>
+
+    <organization>
+        <name>Alibaba Group</name>
+        <url>http://code.alibabatech.com/</url>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-javadoc</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <charset>UTF-8</charset>
+                    <encoding>UTF-8</encoding>
+                    <docencoding>UTF-8</docencoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <downloadUrl>https://oss.sonatype.org/content/groups/public</downloadUrl>
+    </distributionManagement>
 
 </project>
