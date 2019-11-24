@@ -14,20 +14,12 @@ import org.springframework.stereotype.Component;
 import java.lang.reflect.Method;
 
 @Aspect
-@Order(-10)     // 确保在 @Transactional 之前执行
 @Component
 @Slf4j
+@Order(-10)
 public class DynamicDataSourceAspect {
 
-    /**
-     * 第一个* 代表任意的返回值
-     * 包后面.. 表示当前包及其子包
-     * 第二个* 表示类名，代表所有类
-     * .*(..) 表示任何方法,括号代表参数 .. 表示任意参数
-     */
-   // @Pointcut("execution(public * top.kpromise..mapper..*.*(..))")
-   // @Pointcut("@annotation(DataSource)")  //  @DataSource 标注的方法
-    @Pointcut("@within(DataSource)")        //  @DataSource 标注的类和方法
+    @Pointcut("@within(DataSource)")
     public void dataSource() {
     }
 
@@ -51,10 +43,10 @@ public class DynamicDataSourceAspect {
         if (dataSource == null) return;
         String databaseName = dataSource.name();
         if (!DynamicDataSourceContextHolder.isContainsDataSource(databaseName)) {
-            log.error("{} === 数据源 {} 不存在，使用默认的数据源", joinPoint.getSignature(), databaseName);
+            log.error("{} === dataSource {} not exists，use default now", joinPoint.getSignature(), databaseName);
         } else {
-            log.debug("使用数据源：" + databaseName);
-            log.info("{} === 使用数据源 {} ", joinPoint.getSignature(), databaseName);
+            log.debug("use dataSource：" + databaseName);
+            log.info("{} === use dataSource {} ", joinPoint.getSignature(), databaseName);
             DynamicDataSourceContextHolder.setDataSourceType(databaseName);
         }
     }

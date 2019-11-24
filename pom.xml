@@ -6,7 +6,7 @@
 
     <groupId>top.kpromise</groupId>
     <artifactId>dynamic-data-source-spring-boot-starter</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.1.1</version>
     <packaging>jar</packaging>
     <description>Spring Boot with dynamic data source support.</description>
     <name>dynamic-data-source</name>
@@ -22,9 +22,8 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>2.1.1</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
 
         <dependency>
@@ -124,6 +123,18 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.8</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                    <skipNexusStagingDeployMojo>false</skipNexusStagingDeployMojo>
+                </configuration>
             </plugin>
         </plugins>
     </build>
