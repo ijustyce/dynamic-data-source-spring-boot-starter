@@ -6,7 +6,7 @@
 
     <groupId>top.kpromise</groupId>
     <artifactId>dynamic-data-source-spring-boot-starter</artifactId>
-    <version>0.0.1.1</version>
+    <version>0.0.2</version>
     <packaging>jar</packaging>
     <description>Spring Boot with dynamic data source support.</description>
     <name>dynamic-data-source</name>
@@ -46,6 +46,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>1.1.21</version>
         </dependency>
 
     </dependencies>

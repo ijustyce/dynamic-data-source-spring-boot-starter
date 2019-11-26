@@ -1,10 +1,12 @@
 package top.kpromise.dynamicdatasource.dynamicdatasource;
 
+import com.alibaba.druid.pool.DruidDataSource;
+import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
+import com.zaxxer.hikari.HikariDataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.env.Environment;
@@ -71,22 +73,32 @@ public class DynamicDataSourceRegister implements ImportBeanDefinitionRegistrar,
         beanDefinitionRegistry.registerBeanDefinition("dataSource", beanDefinition);
     }
 
-    @SuppressWarnings("unchecked")
     private DataSource buildDataSource(Map<String, Object> map) {
         try {
             Object type = map.get("type");
             if (type == null) {
                 type = DEFAULT_DATASOURCE_TYPE;// 默认DataSource
             }
-            Class<? extends DataSource> dataSourceType = (Class<? extends DataSource>) Class.forName((String) type);
+            log.info("===type==={}", type);
             String driverClassName = map.get("driver-class-name").toString();
             String url = map.get("url").toString();
             String username = map.get("username").toString();
             String password = map.get("password").toString();
 
-            DataSourceBuilder factory = DataSourceBuilder.create().driverClassName(driverClassName).url(url)
-                    .username(username).password(password).type(dataSourceType);
-            return factory.build();
+            if ("com.alibaba.druid.pool.DruidDataSource".equals(type)) {
+                DruidDataSource dataSource = DruidDataSourceBuilder.create().build();
+                dataSource.setUrl(url);
+                dataSource.setUsername(username);
+                dataSource.setPassword(password);
+                dataSource.setDriverClassName(driverClassName);
+                return dataSource;
+            } else if ("com.zaxxer.hikari.HikariDataSource".equals(type)) {
+                HikariDataSource dataSource = new HikariDataSource();
+                dataSource.setUsername(username);
+                dataSource.setPassword(password);
+                dataSource.setJdbcUrl(url);
+                dataSource.setDriverClassName(driverClassName);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
